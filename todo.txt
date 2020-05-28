@@ -1,0 +1,2 @@
+* add bike_update and bike_delete in
+controllers/api/apiBike.js
