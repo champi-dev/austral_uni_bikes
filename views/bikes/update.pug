@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  a(href='/bikes') Volver
+
+  br
+  br
+  br
+
+  h1 Edit Bike
+
+  br
+  br
+
+  form(action='/bikes/' + bike.id + '/update' method='post')
+    label(for='id') ID:
+    input#id(type='text' name='id' value=bike.id)
+    br
+    label(for='color') Color:
+    input#color(type='text' name='color' value=bike.color)
+    br
+    label(for='model') Model:
+    input#model(type='text' name='model' value=bike.model)
+    br
+    label(for='lat') Latitude:
+    input#model(type='text' name='lat' value=bike.location[0])
+    br
+    label(for='lng') Longitude:
+    input#model(type='text' name='lng' value=bike.location[1])
+    br
+    br
+    input.btn.btn-primary(type='submit' value='OK')
