@@ -19,3 +19,22 @@ exports.bike_create = function (req, res) {
     bike
   });
 };
+
+exports.bike_update = function (req, res) {
+  var bike = Bike.findById(req.body.id);
+  bike.id = req.body.id;
+  bike.model = req.body.model;
+  bike.color = req.body.color;
+  bike.location = [req.body.lat, req.body.lng];
+
+  console.log(Bike.all)
+
+  res.status(200).json({
+    bike
+  });
+};
+
+exports.bike_delete = function (req, res) {
+  Bike.removeById(req.body.id);
+  res.status(200).send()
+};

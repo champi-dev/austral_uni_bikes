@@ -1,2 +1,8 @@
-* add bike_update and bike_delete in
+[todo]
+
+
+[done]
 controllers/api/apiBike.js
+- add bike_update 
+- addbike_delete
+
