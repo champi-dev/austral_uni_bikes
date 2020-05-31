@@ -29,10 +29,10 @@ Bike.prototype.toString = function () {
   return 'id: ' + this.id + " | color: " + this.color;
 };
 
-var a = new Bike(1, 'red', 'urban', [-34.6012424, -58.3861497]);
-var b = new Bike(2, 'blanca', 'urban', [-32.6012424, -57.3861497]);
+// var a = new Bike(1, 'red', 'urban', [-34.6012424, -58.3861497]);
+// var b = new Bike(2, 'blanca', 'urban', [-32.6012424, -57.3861497]);
 
-Bike.add(a);
-Bike.add(b);
+// Bike.add(a);
+// Bike.add(b);
 
 module.exports = Bike;
