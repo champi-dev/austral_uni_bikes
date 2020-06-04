@@ -1,5 +1,5 @@
 [todo]
-
+- fix api tests
 
 [done]
 controllers/api/apiBike.js

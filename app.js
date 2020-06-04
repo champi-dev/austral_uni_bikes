@@ -11,6 +11,16 @@ var apiBikesRouter = require('./routes/api/apiBike');
 
 var app = express();
 
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://localhost/bikes_web';
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(
+  console,
+  'MongoDB connection error'
+));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

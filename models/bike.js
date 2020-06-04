@@ -1,38 +1,55 @@
-var Bike = function (id, color, model, location) {
-  this.id = id;
-  this.color = color;
-  this.model = model;
-  this.location = location;
-};
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-Bike.all = [];
+var bikeSchema = new Schema({
+  code: Number,
+  color: String,
+  model: String,
+  location: {
+    type: [Number],
+    index: { type: '2dsphere', sparse: true }
+  }
+});
 
-Bike.add = function (singleBike) {
-  Bike.all.push(singleBike);
-};
-
-Bike.findById = function (id) {
-  var bike = Bike.all.find(b => b.id == id);
-  if (bike) return bike;
-  throw new Error(`Bike with ${id} does not exist`);
-};
-
-Bike.removeById = function (id) {
-  var filtered = [];
-  Bike.all.forEach(bike => {
-    if (bike.id != id) filtered.push(bike);
+bikeSchema.statics.createInstance = function (code, color, model, location) {
+  return new this({
+    code,
+    color,
+    model,
+    location
   });
-  Bike.all = filtered;
 };
 
-Bike.prototype.toString = function () {
-  return 'id: ' + this.id + " | color: " + this.color;
+bikeSchema.statics.add = function (bike, cb) {
+  this.create(bike, cb);
 };
 
-// var a = new Bike(1, 'red', 'urban', [-34.6012424, -58.3861497]);
-// var b = new Bike(2, 'blanca', 'urban', [-32.6012424, -57.3861497]);
+bikeSchema.statics.addMany = function (bikesArr) {
+  bikesArr.forEach(bike => {
+    this.add(bike.bike, bike.cb)
+  })
+}
 
-// Bike.add(a);
-// Bike.add(b);
+bikeSchema.statics.findByCode = function (code, cb) {
+  return this.findOne({ code }, cb);
+}
 
-module.exports = Bike;
+bikeSchema.statics.removeByCode = function (code, cb) {
+  return this.deleteOne({ code }, cb);
+}
+
+bikeSchema.statics.removeMany = function (codesArr) {
+  codesArr.forEach(code => {
+    this.removeByCode(code, code.cb)
+  })
+}
+
+bikeSchema.statics.all = function (cb) {
+  return this.find({}, cb);
+};
+
+bikeSchema.methods.toString = function () {
+  return 'code: ' + this.code + " | color: " + this.color;
+};
+
+module.exports = mongoose.model('Bike', bikeSchema);
