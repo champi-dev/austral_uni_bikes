@@ -1,8 +1,8 @@
 [todo]
-- fix api tests
+
 
 [done]
 controllers/api/apiBike.js
 - add bike_update 
 - addbike_delete
-
+- fix api tests
