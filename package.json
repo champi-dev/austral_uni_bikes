@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
+    "dev": "sudo systemctl start mongod && nodemon ./bin/www",
     "test": "jasmine",
     "test:watch": "nodemon -e js --exec 'npm run test'"
   },
@@ -14,6 +14,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "moment": "^2.26.0",
     "mongoose": "^5.9.17",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11"

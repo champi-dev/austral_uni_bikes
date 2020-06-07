@@ -18,6 +18,12 @@ describe('Bike model', () => {
     })
   });
 
+  afterEach(function () {
+    Bike.deleteMany({}, function (err, success) {
+      if (err) console.log(err);
+    })
+  })
+
   describe('Bike.createInstance', () => {
     it('creates a Bike instance', () => {
       var bike = Bike.createInstance(1, 'green', 'urban', [-34.5, -54.1]);
